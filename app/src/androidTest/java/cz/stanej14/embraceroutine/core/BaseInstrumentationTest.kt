@@ -2,7 +2,6 @@ package cz.stanej14.embraceroutine.core
 
 import cz.stanej14.embraceroutine.App
 import cz.stanej14.embraceroutine.db.RoutineDatabase
-import cz.stanej14.embraceroutine.di.AppModule
 import cz.stanej14.embraceroutine.di.DatabaseModule
 
 /**

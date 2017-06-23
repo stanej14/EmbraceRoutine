@@ -5,6 +5,7 @@ import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
 import cz.stanej14.embraceroutine.model.Routine
+import io.reactivex.Flowable
 
 /**
  * TODO add class description
@@ -13,7 +14,7 @@ import cz.stanej14.embraceroutine.model.Routine
 @Dao
 interface RoutineDao {
     @Query("SELECT * FROM routine")
-    fun getAll(): List<Routine>
+    fun getAll(): Flowable<List<Routine>>
 
     @Insert
     fun insert(routine: Routine): Long

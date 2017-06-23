@@ -34,6 +34,6 @@ class RoutineDaoTest : BaseInstrumentationTest() {
         routine.difficulty = Difficulty.HARD
         val routineDao = db.routineDao()
         routineDao.insert(routine)
-        assertTrue(routineDao.getAll().first() == routine)
+        assertTrue(routineDao.getAll().blockingFirst().first() == routine)
     }
 }

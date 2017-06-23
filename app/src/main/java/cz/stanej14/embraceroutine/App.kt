@@ -1,30 +1,32 @@
 package cz.stanej14.embraceroutine
 
+import android.app.Activity
 import android.app.Application
-import cz.stanej14.embraceroutine.di.AppModule
-import cz.stanej14.embraceroutine.di.DaggerRoutineComponent
-import cz.stanej14.embraceroutine.di.DatabaseModule
-import cz.stanej14.embraceroutine.di.RoutineComponent
+import cz.stanej14.embraceroutine.di.DaggerAppComponent
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasActivityInjector
+import javax.inject.Inject
+
 
 /**
  * TODO add class description
  * Created by Jan Stanek[jan.stanek@firma.seznam.cz] on {22/06/17}
  **/
-class App : Application() {
+class App : Application(), HasActivityInjector {
 
-    companion object {
-        lateinit var routineComponent: RoutineComponent
-        lateinit var instance: App
+    @Inject
+    lateinit var dispatchingActivityInjector: DispatchingAndroidInjector<Activity>
+
+    override fun activityInjector(): AndroidInjector<Activity> {
+        return dispatchingActivityInjector;
     }
 
     override fun onCreate() {
         super.onCreate()
-
-        instance = this
-
-        routineComponent = DaggerRoutineComponent.builder()
-                .appModule(AppModule(this))
-                .databaseModule(DatabaseModule(this, "embrace_routine.db"))
+        DaggerAppComponent.builder()
+                .application(this)
                 .build()
+                .inject(this)
     }
 }

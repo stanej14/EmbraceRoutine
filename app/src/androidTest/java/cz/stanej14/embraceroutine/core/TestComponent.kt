@@ -1,7 +1,6 @@
 package cz.stanej14.embraceroutine.core
 
 import cz.stanej14.embraceroutine.db.RoutineDaoTest
-import cz.stanej14.embraceroutine.di.AppModule
 import cz.stanej14.embraceroutine.di.DatabaseModule
 import dagger.Component
 import javax.inject.Singleton
