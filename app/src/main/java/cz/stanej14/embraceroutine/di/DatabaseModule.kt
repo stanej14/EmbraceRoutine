@@ -1,7 +1,7 @@
 package cz.stanej14.embraceroutine.di
 
-import android.app.Application
 import android.arch.persistence.room.Room
+import android.content.Context
 import cz.stanej14.embraceroutine.db.DbSettings
 import cz.stanej14.embraceroutine.db.RoutineDao
 import cz.stanej14.embraceroutine.db.RoutineDatabase
@@ -18,8 +18,8 @@ class DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideDb(app: Application, dbSettings: DbSettings): RoutineDatabase {
-        return Room.databaseBuilder(app, RoutineDatabase::class.java, dbSettings.provideName()).build()
+    fun provideDb(appContext: Context, dbSettings: DbSettings): RoutineDatabase {
+        return Room.databaseBuilder(appContext, RoutineDatabase::class.java, dbSettings.provideName()).build()
     }
 
     @Singleton

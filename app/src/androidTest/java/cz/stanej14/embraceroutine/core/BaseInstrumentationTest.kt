@@ -1,8 +1,7 @@
 package cz.stanej14.embraceroutine.core
 
-import cz.stanej14.embraceroutine.App
+import android.support.test.InstrumentationRegistry
 import cz.stanej14.embraceroutine.db.RoutineDatabase
-import cz.stanej14.embraceroutine.di.DatabaseModule
 
 /**
  * TODO add class description
@@ -10,15 +9,15 @@ import cz.stanej14.embraceroutine.di.DatabaseModule
  **/
 abstract class BaseInstrumentationTest {
 
-    var testComponent: TestComponent = DaggerTestComponent.builder()
-            .appModule(AppModule(App.instance))
-            .databaseModule(DatabaseModule(App.instance, "test.db"))
-            .build()
+    var testComponent: TestComponent =
+            DaggerTestComponent.builder()
+                    .appContext(InstrumentationRegistry.getContext())
+                    .build()
 
     fun clearDatabase(db: RoutineDatabase) {
         with(db) {
             beginTransaction()
-            routineDao().removeAll(routineDao().getAll())
+            routineDao().removeAll(routineDao().getAll().blockingFirst())
             endTransaction()
         }
     }

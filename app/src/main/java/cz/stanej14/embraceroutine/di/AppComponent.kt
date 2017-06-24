@@ -1,5 +1,6 @@
 package cz.stanej14.embraceroutine.di
 
+import android.content.Context
 import cz.stanej14.embraceroutine.App
 import dagger.BindsInstance
 import dagger.Component
@@ -14,12 +15,16 @@ import javax.inject.Singleton
 @Component(modules = arrayOf(
         AndroidInjectionModule::class,
         MainModule::class,
+        AppModule::class,
         DatabaseModule::class))
 interface AppComponent {
 
     @Component.Builder
     interface Builder {
-        @BindsInstance fun application(application: App): Builder
+
+        @BindsInstance
+        fun appContext(appContext: Context): Builder
+
         fun build(): AppComponent
     }
 
