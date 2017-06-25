@@ -1,6 +1,7 @@
 package cz.stanej14.embraceroutine.core
 
 import android.content.Context
+import cz.stanej14.embraceroutine.db.DbSettings
 import cz.stanej14.embraceroutine.db.RoutineDaoTest
 import cz.stanej14.embraceroutine.di.AppModule
 import cz.stanej14.embraceroutine.di.DatabaseModule
@@ -27,6 +28,9 @@ interface TestComponent {
 
         @BindsInstance
         fun appContext(appContext: Context): Builder
+
+        @BindsInstance
+        fun dbSettings(dbSettings: DbSettings): Builder
 
         fun build(): TestComponent
     }

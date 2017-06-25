@@ -2,6 +2,7 @@ package cz.stanej14.embraceroutine.di
 
 import android.content.Context
 import cz.stanej14.embraceroutine.App
+import cz.stanej14.embraceroutine.db.DbSettings
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -24,6 +25,9 @@ interface AppComponent {
 
         @BindsInstance
         fun appContext(appContext: Context): Builder
+
+        @BindsInstance
+        fun dbSettings(dbSettings: DbSettings): Builder
 
         fun build(): AppComponent
     }

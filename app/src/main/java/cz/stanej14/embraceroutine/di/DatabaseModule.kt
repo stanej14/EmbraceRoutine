@@ -13,7 +13,7 @@ import javax.inject.Singleton
  * TODO add class description
  * Created by Jan Stanek[jan.stanek@firma.seznam.cz] on {22/06/17}
  **/
-@Module(includes = arrayOf(DatabaseSettingsModule::class))
+@Module
 class DatabaseModule {
 
     @Singleton

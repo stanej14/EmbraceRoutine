@@ -2,6 +2,7 @@ package cz.stanej14.embraceroutine
 
 import android.app.Activity
 import android.app.Application
+import cz.stanej14.embraceroutine.db.DbSettings
 import cz.stanej14.embraceroutine.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -26,6 +27,7 @@ class App : Application(), HasActivityInjector {
         super.onCreate()
         DaggerAppComponent.builder()
                 .appContext(this)
+                .dbSettings(DbSettings("embrace_routine.db"))
                 .build()
                 .inject(this)
     }
