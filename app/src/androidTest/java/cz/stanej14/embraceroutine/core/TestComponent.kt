@@ -4,8 +4,6 @@ import android.content.Context
 import cz.stanej14.embraceroutine.db.DbSettings
 import cz.stanej14.embraceroutine.db.RoutineDaoTest
 import cz.stanej14.embraceroutine.di.AppModule
-import cz.stanej14.embraceroutine.di.DatabaseModule
-import cz.stanej14.embraceroutine.di.MainModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -18,9 +16,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = arrayOf(
         AndroidInjectionModule::class,
-        MainModule::class,
-        AppModule::class,
-        DatabaseModule::class))
+        AppModule::class))
 interface TestComponent {
 
     @Component.Builder

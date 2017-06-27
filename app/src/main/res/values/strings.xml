@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Embrace Routine</string>
+
+    <!--Create routine-->
+    <string name="create_routine_title_hint">Routine name</string>
+    <string name="create_routine_goal_hint">My goal</string>
+    <string name="create_routine_period_hint">How often will i do this</string>
+    <string name="create_routine_difficulty_hint">How hard is this</string>
+    <string name="create_routine_difficulty_easy">Easy</string>
+    <string name="create_routine_difficulty_medium">Medium</string>
+    <string name="create_routine_difficulty_hard">Hard</string>
+    <string name="create_routine_difficulty_super_hard">Super hard!</string>
+
+
 </resources>

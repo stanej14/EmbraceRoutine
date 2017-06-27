@@ -2,11 +2,18 @@ package cz.stanej14.embraceroutine
 
 import android.app.Activity
 import android.app.Application
+import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
+import android.support.v4.app.FragmentManager
 import cz.stanej14.embraceroutine.db.DbSettings
 import cz.stanej14.embraceroutine.di.DaggerAppComponent
-import dagger.android.AndroidInjector
+import cz.stanej14.embraceroutine.di.Injectable
+import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
+import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
 
@@ -19,10 +26,6 @@ class App : Application(), HasActivityInjector {
     @Inject
     lateinit var dispatchingActivityInjector: DispatchingAndroidInjector<Activity>
 
-    override fun activityInjector(): AndroidInjector<Activity> {
-        return dispatchingActivityInjector;
-    }
-
     override fun onCreate() {
         super.onCreate()
         DaggerAppComponent.builder()
@@ -30,5 +33,53 @@ class App : Application(), HasActivityInjector {
                 .dbSettings(DbSettings("embrace_routine.db"))
                 .build()
                 .inject(this)
+
+        registerActivityLifecycleCallbacks(CustomActivityLifecycleCallbacks())
+    }
+
+    override fun activityInjector(): DispatchingAndroidInjector<Activity> {
+        return dispatchingActivityInjector;
+    }
+
+    class CustomActivityLifecycleCallbacks : ActivityLifecycleCallbacks {
+        override fun onActivityPaused(activity: Activity?) {
+        }
+
+        override fun onActivityResumed(activity: Activity?) {
+        }
+
+        override fun onActivityStarted(activity: Activity?) {
+        }
+
+        override fun onActivityDestroyed(activity: Activity?) {
+        }
+
+        override fun onActivitySaveInstanceState(activity: Activity?, outState: Bundle?) {
+        }
+
+        override fun onActivityStopped(activity: Activity?) {
+        }
+
+        override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {
+            activity?.let { handleActivity(it) }
+        }
+
+        private fun handleActivity(activity: Activity) {
+            if (activity is HasSupportFragmentInjector) {
+                AndroidInjection.inject(activity)
+            }
+            if (activity is FragmentActivity) {
+                activity.supportFragmentManager
+                        .registerFragmentLifecycleCallbacks(
+                                object : FragmentManager.FragmentLifecycleCallbacks() {
+                                    override fun onFragmentCreated(fm: FragmentManager?, f: Fragment?,
+                                                                   savedInstanceState: Bundle?) {
+                                        if (f is Injectable) {
+                                            AndroidSupportInjection.inject(f)
+                                        }
+                                    }
+                                }, true)
+            }
+        }
     }
 }

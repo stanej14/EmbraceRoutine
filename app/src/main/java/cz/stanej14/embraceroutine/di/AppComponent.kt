@@ -15,10 +15,10 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = arrayOf(
         AndroidInjectionModule::class,
-        MainModule::class,
         AppModule::class,
-        DatabaseModule::class))
-interface AppComponent {
+        MainActivityModule::class
+))
+public interface AppComponent {
 
     @Component.Builder
     interface Builder {

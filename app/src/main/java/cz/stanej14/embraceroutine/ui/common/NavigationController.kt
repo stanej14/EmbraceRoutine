@@ -2,6 +2,7 @@ package cz.stanej14.embraceroutine.ui.common
 
 import cz.stanej14.embraceroutine.R
 import cz.stanej14.embraceroutine.ui.MainActivity
+import cz.stanej14.embraceroutine.ui.creation.CreateRoutineFragment
 import cz.stanej14.embraceroutine.ui.overview.RoutineOverviewFragment
 import javax.inject.Inject
 
@@ -17,6 +18,13 @@ class NavigationController @Inject constructor(mainActivity: MainActivity) {
         val overviewFragment = RoutineOverviewFragment()
         fragmentManager.beginTransaction()
                 .replace(containerId, overviewFragment)
+                .commit()
+    }
+
+    fun navigateToCreation() {
+        val routineCreateFragment = CreateRoutineFragment()
+        fragmentManager.beginTransaction()
+                .replace(containerId, routineCreateFragment)
                 .commit()
     }
 }
