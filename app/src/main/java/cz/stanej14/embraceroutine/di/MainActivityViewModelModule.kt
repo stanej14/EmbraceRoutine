@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import cz.stanej14.embraceroutine.ui.common.CustomViewModelFactory
 import cz.stanej14.embraceroutine.ui.creation.CreateRoutineViewModel
+import cz.stanej14.embraceroutine.ui.creation.RoutineDetailViewModel
 import cz.stanej14.embraceroutine.ui.overview.RoutineOverviewViewModel
 import dagger.Binds
 import dagger.Module
@@ -24,7 +25,12 @@ abstract class MainActivityViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(CreateRoutineViewModel::class)
-    abstract fun bindSearchViewModel(viewModel: CreateRoutineViewModel): ViewModel
+    abstract fun bindCreateRoutineViewModel(viewModel: CreateRoutineViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RoutineDetailViewModel::class)
+    abstract fun bindRoutineDetailViewModel(viewModel: RoutineDetailViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: CustomViewModelFactory): ViewModelProvider.Factory

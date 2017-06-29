@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentManager
+import com.facebook.stetho.Stetho
 import cz.stanej14.embraceroutine.db.DbSettings
 import cz.stanej14.embraceroutine.di.DaggerAppComponent
 import cz.stanej14.embraceroutine.di.Injectable
@@ -14,6 +15,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -35,6 +37,10 @@ class App : Application(), HasActivityInjector {
                 .inject(this)
 
         registerActivityLifecycleCallbacks(CustomActivityLifecycleCallbacks())
+
+        Timber.plant(Timber.DebugTree())
+
+        Stetho.initializeWithDefaults(this)
     }
 
     override fun activityInjector(): DispatchingAndroidInjector<Activity> {

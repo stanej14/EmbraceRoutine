@@ -16,6 +16,9 @@ interface RoutineDao {
     @Query("SELECT * FROM routine")
     fun getAll(): Flowable<List<Routine>>
 
+    @Query("SELECT * FROM routine WHERE id = :arg0")
+    fun get(routineId: Long): Flowable<Routine>
+
     @Insert
     fun insert(routine: Routine): Long
 

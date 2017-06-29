@@ -27,15 +27,31 @@ class RoutineDaoTest : BaseInstrumentationTest() {
     }
 
     @Test
-    fun saveAndLoadRoutine() {
-        val routine = Routine()
-        routine.name = "Name"
-        routine.goal = "Goal"
-        routine.difficulty = Difficulty.HARD
+    fun saveAndLoadAllRoutines() {
         val routineDao = db.routineDao()
-        routineDao.insert(routine)
+        val size = 10
+        for (i in 1..size) routineDao.insert(generateRoutine())
         val list = routineDao.getAll().blockingFirst()
-        assertTrue(list.first() == routine)
-        assertTrue(list.size == 1)
+        assertTrue(list.size == size)
+    }
+
+    @Test
+    fun saveAndLoadRoutine() {
+        val routine = generateRoutine()
+        val routineDao = db.routineDao()
+        val id = routineDao.insert(routine)
+        routine.id = id
+        val savedRoutine = routineDao.get(id).blockingFirst()
+        assertTrue(savedRoutine == routine)
+    }
+
+    fun generateRoutine(): Routine {
+        val routine = Routine()
+        with(routine) {
+            name = "Name"
+            goal = "Goal"
+            difficulty = Difficulty.HARD
+        }
+        return routine
     }
 }

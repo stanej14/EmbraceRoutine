@@ -2,6 +2,8 @@ package cz.stanej14.embraceroutine.ui.overview
 
 import android.arch.lifecycle.ViewModel
 import cz.stanej14.embraceroutine.db.RoutineDao
+import cz.stanej14.embraceroutine.model.Routine
+import io.reactivex.Flowable
 import javax.inject.Inject
 
 /**
@@ -15,5 +17,9 @@ class RoutineOverviewViewModel @Inject constructor() : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
+    }
+
+    fun observe(): Flowable<List<Routine>> {
+        return routineDao.getAll()
     }
 }

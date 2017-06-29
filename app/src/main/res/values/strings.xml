@@ -10,6 +10,10 @@
     <string name="create_routine_difficulty_medium">Medium</string>
     <string name="create_routine_difficulty_hard">Hard</string>
     <string name="create_routine_difficulty_super_hard">Super hard!</string>
+    <string name="create_routine_create">Create!</string>
+
+    <!--Overview-->
+    <string name="overview_create">New Routine</string>
 
 
 </resources>

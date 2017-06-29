@@ -1,6 +1,7 @@
 package cz.stanej14.embraceroutine.di
 
 import cz.stanej14.embraceroutine.ui.creation.CreateRoutineFragment
+import cz.stanej14.embraceroutine.ui.creation.RoutineDetailFragment
 import cz.stanej14.embraceroutine.ui.overview.RoutineOverviewFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -16,4 +17,7 @@ public abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeCreateRoutineFragment(): CreateRoutineFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeRoutineDetailFragment(): RoutineDetailFragment
 }
