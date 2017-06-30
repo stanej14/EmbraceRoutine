@@ -3,8 +3,8 @@ package cz.stanej14.embraceroutine.ui.creation
 import android.arch.lifecycle.ViewModel
 import android.os.Bundle
 import cz.stanej14.embraceroutine.db.RoutineDao
-import cz.stanej14.embraceroutine.model.Difficulty
 import cz.stanej14.embraceroutine.model.Routine
+import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -17,31 +17,23 @@ import javax.inject.Inject
  **/
 class CreateRoutineViewModel @Inject constructor() : ViewModel() {
 
-    var name = ""
-    var goal = ""
-    var difficulty = Difficulty.EASY
-    var period: Long = 0
-    var createdInMillis: Long = 0
-
     @Inject
     lateinit var routineDao: RoutineDao
 
-    fun loadRoutine(bundle: Bundle) {
-        TODO()
-    }
+    val routine: Routine = Routine()
 
     fun createRoutine() {
-        val routine = Routine()
-        routine.name = name
-        routine.goal = goal
-        routine.difficulty = difficulty
-        routine.createdInMillis = createdInMillis
-        routine.period = period
-
         Observable.just(routine)
                 .subscribeOn(Schedulers.io())
                 .map(routineDao::insert)
                 .doOnError(Timber::e)
                 .subscribe({ Timber.i("Routine " + it.toString() + " was created.") })
+    }
+
+    fun observe(arguments: Bundle?): Flowable<Routine> {
+        if (arguments != null) {
+            routineDao.get(arguments.getLong(CreateRoutineFragment.ROUTINE_ID_KEY))
+        }
+        return Flowable.just(routine)
     }
 }

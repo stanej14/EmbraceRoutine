@@ -17,4 +17,6 @@ class RoutineDetailViewModel @Inject constructor() : ViewModel() {
     lateinit var routineDao: RoutineDao
 
     fun getRoutine(routineId: Long): Flowable<Routine> = routineDao.get(routineId)
+
+    fun delete(routine: Routine) = routineDao.delete(routine)
 }

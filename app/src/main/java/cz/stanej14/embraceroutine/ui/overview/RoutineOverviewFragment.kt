@@ -31,7 +31,7 @@ class RoutineOverviewFragment : LifecycleFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    lateinit var compositeDisposable: CompositeDisposable
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.fragment_routine_overview, container, false)
@@ -59,6 +59,7 @@ class RoutineOverviewFragment : LifecycleFragment(), Injectable {
         })
 
         val viewModel = ViewModelProviders.of(this, viewModelFactory).get(RoutineOverviewViewModel::class.java)
+        compositeDisposable = CompositeDisposable()
         compositeDisposable.add(viewModel.observe()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(routineAdapter::setData, Timber::e))

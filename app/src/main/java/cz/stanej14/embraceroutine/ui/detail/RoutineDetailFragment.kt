@@ -63,13 +63,16 @@ class RoutineDetailFragment : LifecycleFragment(), Injectable {
         viewModel.getRoutine(routineId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ showData(it, view) }, Timber::e)
+                .subscribe({ showData(it, viewModel, view) }, Timber::e)
     }
 
-    fun showData(routine: Routine, view: View?) {
+    fun showData(routine: Routine, viewModel: RoutineDetailViewModel, view: View?) {
         if (view == null) return
 
         val textTitle = view.findViewById(R.id.txt_item_routine_name) as TextView
         textTitle.text = routine.name
+
+        view.findViewById(R.id.btn_routine_detail_delete).setOnClickListener({ viewModel.delete(routine) })
+        view.findViewById(R.id.btn_routine_detail_edit).setOnClickListener({ navigationController.navigateToEdit(routine.id) })
     }
 }

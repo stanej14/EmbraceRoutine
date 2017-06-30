@@ -24,7 +24,7 @@ class NavigationController @Inject constructor(mainActivity: MainActivity) {
     }
 
     fun navigateToCreation() {
-        val routineCreateFragment = CreateRoutineFragment()
+        val routineCreateFragment = CreateRoutineFragment.createRoutine()
         fragmentManager.beginTransaction()
                 .replace(containerId, routineCreateFragment)
                 .addToBackStack("CreateRoutineFragment")
@@ -41,5 +41,13 @@ class NavigationController @Inject constructor(mainActivity: MainActivity) {
 
     fun navigateBack() {
         fragmentManager.popBackStack()
+    }
+
+    fun navigateToEdit(routineId: Long) {
+        val routineCreateFragment = CreateRoutineFragment.editRoutine(routineId)
+        fragmentManager.beginTransaction()
+                .replace(containerId, routineCreateFragment)
+                .addToBackStack("CreateRoutineFragment_Edit")
+                .commit()
     }
 }

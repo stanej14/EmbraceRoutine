@@ -15,5 +15,8 @@
     <!--Overview-->
     <string name="overview_create">New Routine</string>
 
+    <!--Detail-->
+    <string name="routine_detail_delete">Delete</string>
+    <string name="routine_detail_edit">Edit</string>
 
 </resources>
