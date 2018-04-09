@@ -10,7 +10,6 @@ import cz.stanej14.embraceroutine.model.Routine
  * Created by Jan Stanek[jan.stanek@firma.seznam.cz] on {21/06/17}
  **/
 @Database(entities = arrayOf(Routine::class), version = 1)
-@TypeConverters(Converters  ::class)
 abstract class RoutineDatabase : RoomDatabase() {
     abstract fun routineDao(): RoutineDao
 }

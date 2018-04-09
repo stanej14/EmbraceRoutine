@@ -6,9 +6,10 @@ import cz.stanej14.embraceroutine.db.RoutineDao
 import cz.stanej14.embraceroutine.model.Routine
 import io.reactivex.Flowable
 import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.Scheduler
 import timber.log.Timber
 import javax.inject.Inject
+import javax.inject.Named
 
 
 /**
@@ -18,13 +19,16 @@ import javax.inject.Inject
 class CreateRoutineViewModel @Inject constructor() : ViewModel() {
 
     @Inject
-    lateinit var routineDao: RoutineDao
+    internal lateinit var routineDao: RoutineDao
+
+    @Inject @field:Named("database")
+    internal lateinit var databaseScheduler: Scheduler
 
     val routine: Routine = Routine()
 
     fun createRoutine() {
         Observable.just(routine)
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(databaseScheduler)
                 .map(routineDao::insert)
                 .doOnError(Timber::e)
                 .subscribe({ Timber.i("Routine " + it.toString() + " was created.") })

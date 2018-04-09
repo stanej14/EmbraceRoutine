@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel
 import cz.stanej14.embraceroutine.db.RoutineDao
 import cz.stanej14.embraceroutine.model.Routine
 import io.reactivex.Flowable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 
@@ -18,5 +19,10 @@ class RoutineDetailViewModel @Inject constructor() : ViewModel() {
 
     fun getRoutine(routineId: Long): Flowable<Routine> = routineDao.get(routineId)
 
-    fun delete(routine: Routine) = routineDao.delete(routine)
+    fun delete(routine: Routine) {
+        Flowable.just(routine)
+                .subscribeOn(Schedulers.io())
+                .doOnNext(routineDao::delete)
+                .subscribe()
+    }
 }

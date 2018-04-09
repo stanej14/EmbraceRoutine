@@ -1,10 +1,10 @@
 package cz.stanej14.embraceroutine.ui.overview
 
-import android.arch.lifecycle.LifecycleFragment
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.graphics.Rect
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -23,7 +23,7 @@ import javax.inject.Inject
  * TODO add class description
  * Created by Jan Stanek[jan.stanek@firma.seznam.cz] on {23/06/17}
  **/
-class RoutineOverviewFragment : LifecycleFragment(), Injectable {
+class RoutineOverviewFragment : Fragment(), Injectable {
 
     @Inject
     lateinit var navigationController: NavigationController
@@ -33,17 +33,14 @@ class RoutineOverviewFragment : LifecycleFragment(), Injectable {
 
     lateinit var compositeDisposable: CompositeDisposable
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_routine_overview, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_routine_overview, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Timber.i("onViewCreated")
-
-        if (view == null) return
-        val recycler = (view.findViewById(R.id.recycler_routine_overview)) as RecyclerView
+        val recycler = view.findViewById<RecyclerView>(R.id.recycler_routine_overview)
         val routineAdapter = RoutineAdapter(object : RoutineAdapter.RoutineClickListener {
             override fun onRoutineClicked(routineId: Long) {
                 navigationController.navigateToDetail(routineId)
@@ -64,12 +61,11 @@ class RoutineOverviewFragment : LifecycleFragment(), Injectable {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(routineAdapter::setData, Timber::e))
 
-        view.findViewById(R.id.btn_routine_overview_new_routine).setOnClickListener({ navigationController.navigateToCreation() })
+        view.findViewById<View>(R.id.btn_routine_overview_new_routine).setOnClickListener({ navigationController.navigateToCreation() })
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         compositeDisposable.dispose()
-        Timber.i("onDestroyView")
     }
 }

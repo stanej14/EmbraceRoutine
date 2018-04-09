@@ -23,26 +23,26 @@ class RoutineAdapter(val routineClickListener: RoutineClickListener) : RecyclerV
         notifyDataSetChanged()
     }
 
-    override fun onBindViewHolder(holder: RoutineViewHolder?, position: Int) {
-        holder?.bind(routineList[position], routineClickListener)
+    override fun onBindViewHolder(holder: RoutineViewHolder, position: Int) {
+        holder.bind(routineList[position], routineClickListener)
     }
 
     override fun getItemCount(): Int = routineList.size
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RoutineViewHolder {
-        val inflate = LayoutInflater.from(parent?.context).inflate(R.layout.item_routine, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoutineViewHolder {
+        val inflate = LayoutInflater.from(parent.context).inflate(R.layout.item_routine, parent, false)
         val routineViewHolder = RoutineViewHolder(inflate)
         return routineViewHolder
     }
 
     class RoutineViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val name = itemView.findViewById(R.id.txt_item_routine_name) as TextView
-        val difficulty = itemView.findViewById(R.id.txt_item_routine_difficulty) as TextView
+        val name = itemView.findViewById<TextView>(R.id.txt_item_routine_name)
+        val goal = itemView.findViewById<TextView>(R.id.txt_item_routine_goal)
 
         fun bind(routine: Routine, routineClickListener: RoutineClickListener) {
             name.text = routine.name
-            difficulty.text = routine.difficulty.name
+            goal.text = routine.goal
             itemView.setOnClickListener { routineClickListener.onRoutineClicked(routine.id) }
         }
     }

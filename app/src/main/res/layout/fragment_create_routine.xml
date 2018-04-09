@@ -31,37 +31,6 @@
             android:layout_width="wrap_content"
             android:layout_height="16dp"/>
 
-        <RadioGroup
-            android:id="@+id/radiogroup_create_routine"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RadioButton
-                android:id="@+id/radio_create_routine_easy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/create_routine_difficulty_easy"/>
-
-            <RadioButton
-                android:id="@+id/radio_create_routine_medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/create_routine_difficulty_medium"/>
-
-            <RadioButton
-                android:id="@+id/radio_create_routine_hard"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/create_routine_difficulty_hard"/>
-
-            <RadioButton
-                android:id="@+id/radio_create_routine_super_hard"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/create_routine_difficulty_super_hard"/>
-
-        </RadioGroup>
-
         <Button
             android:id="@+id/btn_create_routine"
             android:layout_width="match_parent"

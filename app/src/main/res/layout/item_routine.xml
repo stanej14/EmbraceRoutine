@@ -15,9 +15,9 @@
         tools:text="Title"/>
 
     <TextView
-        android:id="@+id/txt_item_routine_difficulty"
+        android:id="@+id/txt_item_routine_goal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-        tools:text="Hard"/>
+        tools:text="Goal"/>
 </LinearLayout>
